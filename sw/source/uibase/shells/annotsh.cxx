@@ -1113,7 +1113,11 @@ void SwAnnotationShell::NoteExec(SfxRequest const &rReq)
             if ( pPostItMgr->HasActiveSidebarWin() )
                 pPostItMgr->GetActiveSidebarWin()->ExecuteCommand(nSlot);
             break;
-
+        case FN_HIDE_NOTE:
+            std::cerr << "FN_HIDE_NOTE (slot=" << nSlot << ")" << std::endl;
+            if ( pPostItMgr->HasActiveSidebarWin() )
+                pPostItMgr->GetActiveSidebarWin()->ExecuteCommand(nSlot);
+            break;
         case FN_DELETE_ALL_NOTES:
             pPostItMgr->Delete();
             break;
@@ -1129,8 +1133,6 @@ void SwAnnotationShell::NoteExec(SfxRequest const &rReq)
                 pPostItMgr->Delete( pPostItMgr->GetActiveSidebarWin()->GetAuthor() );
             break;
         }
-        case FN_HIDE_NOTE:
-            break;
         case FN_HIDE_ALL_NOTES:
             pPostItMgr->Hide();
             break;
@@ -1141,6 +1143,7 @@ void SwAnnotationShell::NoteExec(SfxRequest const &rReq)
                 pPostItMgr->Hide( pItem->GetValue() );
             else if ( pPostItMgr->HasActiveSidebarWin() )
                 pPostItMgr->Hide( pPostItMgr->GetActiveSidebarWin()->GetAuthor() );
+            break;
         }
     }
 }
