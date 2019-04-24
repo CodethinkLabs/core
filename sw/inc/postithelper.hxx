@@ -90,6 +90,7 @@ class SwSidebarItem
 public:
     VclPtr<sw::annotation::SwAnnotationWin> pPostIt;
     bool bShow;
+    bool bResolved;
     bool bFocus;
     bool bPendingLayout;
 

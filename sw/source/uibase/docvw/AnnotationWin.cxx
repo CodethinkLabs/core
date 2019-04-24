@@ -78,6 +78,7 @@ SwAnnotationWin::SwAnnotationWin( SwEditWin& rEditWin,
     , mpMenuButton(nullptr)
     , mColorAnchor()
     , mColorDark()
+    , mColorResolved()
     , mColorLight()
     , mChangeColor()
     , meSidebarPosition(sw::sidebarwindows::SidebarPosition::NONE)
@@ -94,6 +95,7 @@ SwAnnotationWin::SwAnnotationWin( SwEditWin& rEditWin,
     , mpFormatField(aField)
     , mpField( static_cast<SwPostItField*>(aField->GetField()))
     , mpButtonPopup(nullptr)
+    , mbResolved(false)
 {
     mpShadow = sidebarwindows::ShadowOverlayObject::CreateShadowOverlayObject( mrView );
     if ( mpShadow )

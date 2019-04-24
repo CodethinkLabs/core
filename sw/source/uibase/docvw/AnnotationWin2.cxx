@@ -972,6 +972,8 @@ void SwAnnotationWin::SetColor(Color aColorDark,Color aColorLight, Color aColorA
     mColorDark =  aColorDark;
     mColorLight = aColorLight;
     mColorAnchor = aColorAnchor;
+    mColorResolved =  Color(0x00, 0xFF, 0x00, 0x00);
+
 
     if ( !Application::GetSettings().GetStyleSettings().GetHighContrastMode() )
     {
@@ -1293,7 +1295,11 @@ IMPL_LINK_NOARG(SwAnnotationWin, DeleteHdl, void*, void)
 
 IMPL_LINK_NOARG(SwAnnotationWin, HideHdl, void*, void)
 {
-    GetTopReplyNote()->GetOutlinerView()->InsertText("RESOLVED");
+    std::cerr << "HideHdl[" << this << "]: marking top comment [" << GetTopReplyNote() << " resolved and invalidating" << std::endl;
+    GetTopReplyNote()->MarkResolved();
+    Rescale();
+    Update();
+    Invalidate();
 }
 
 
@@ -1430,7 +1436,7 @@ void SwAnnotationWin::SetViewState(ViewState bViewState)
 
 SwAnnotationWin* SwAnnotationWin::GetTopReplyNote()
 {
-    SwAnnotationWin* pTopNote = nullptr;
+    SwAnnotationWin* pTopNote = this;
     SwAnnotationWin* pSidebarWin = IsFollow() ? mrMgr.GetNextPostIt(KEY_PAGEUP, this) : nullptr;
     while (pSidebarWin)
     {
