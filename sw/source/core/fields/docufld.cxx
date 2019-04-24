@@ -1744,6 +1744,7 @@ SwPostItField::SwPostItField( SwPostItFieldType* pT,
     , m_sInitials( rInitials )
     , m_sName( rName )
     , m_aDateTime( rDateTime )
+    , m_bResolved( false )
 {
     m_nPostItId = nPostItId == 0 ? m_nLastPostItId++ : nPostItId;
 }
@@ -1766,6 +1767,16 @@ OUString SwPostItField::ExpandImpl(SwRootFrame const*const) const
 OUString SwPostItField::GetDescription() const
 {
     return SwResId(STR_NOTE);
+}
+
+void SwPostItField::SetResolved(bool bNewState)
+{
+    m_bResolved = bNewState;
+}
+
+bool SwPostItField::GetResolved() const
+{
+    return m_bResolved;
 }
 
 std::unique_ptr<SwField> SwPostItField::Copy() const

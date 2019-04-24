@@ -445,6 +445,7 @@ class SW_DLLPUBLIC SwPostItField : public SwField
     OUString m_sInitials; ///< Initials of the author.
     OUString m_sName;     ///< Name of the comment.
     DateTime    m_aDateTime;
+    bool     m_bResolved;
     std::unique_ptr<OutlinerParaObject> mpText;
     rtl::Reference<SwTextAPIObject> m_xTextObject;
     sal_uInt32 m_nPostItId;
@@ -487,6 +488,8 @@ public:
 
     const OutlinerParaObject* GetTextObject() const { return mpText.get();}
     void SetTextObject( std::unique_ptr<OutlinerParaObject> pText );
+    void SetResolved(bool bNewState);
+    bool GetResolved() const;
 
     sal_Int32 GetNumberOfParagraphs() const;
 

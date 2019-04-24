@@ -144,7 +144,7 @@ class SwAnnotationWin : public vcl::Window
         void         SetColor(Color aColorDark,Color aColorLight, Color aColorAnchor);
         const Color& ColorAnchor() { return mColorAnchor; }
         const Color& ColorDark() { return mColorDark; }
-        const Color& ColorResolved() { return mbResolved? mColorResolved : mColorDark; }
+        const Color& ColorResolved() { return IsResolved() ? mColorResolved : mColorDark; }
         const Color& ColorLight() { return mColorLight; }
         void         Rescale();
 
@@ -189,8 +189,9 @@ class SwAnnotationWin : public vcl::Window
         bool IsHitWindow(const Point& rPointLogic);
         /// Allows adjusting the point or mark of the selection to a document coordinate.
         void SetCursorLogicPosition(const Point& rPosition, bool bPoint, bool bClearMark);
-        void MarkResolved() { mbResolved = true; }
-
+        void MarkResolved();
+        bool IsResolved() const;
+    
     private:
         VclPtr<MenuButton> CreateMenuButton();
         virtual void    LoseFocus() override;
@@ -248,8 +249,7 @@ class SwAnnotationWin : public vcl::Window
 
         bool            mbReadonly;
         bool            mbIsFollow;
-        bool            mbResolved;
-
+        
         SwSidebarItem& mrSidebarItem;
         const SwFrame* mpAnchorFrame;
 

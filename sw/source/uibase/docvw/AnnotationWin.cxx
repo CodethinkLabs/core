@@ -95,7 +95,6 @@ SwAnnotationWin::SwAnnotationWin( SwEditWin& rEditWin,
     , mpFormatField(aField)
     , mpField( static_cast<SwPostItField*>(aField->GetField()))
     , mpButtonPopup(nullptr)
-    , mbResolved(false)
 {
     mpShadow = sidebarwindows::ShadowOverlayObject::CreateShadowOverlayObject( mrView );
     if ( mpShadow )
@@ -212,6 +211,19 @@ void SwAnnotationWin::SetPostItText()
         GetOutlinerView()->ShowCursor();
     Invalidate();
 }
+
+void SwAnnotationWin::MarkResolved()
+{
+    // Marks the postit data as resolved
+    static_cast<SwPostItField*>(mpFormatField->GetField())->SetResolved(true);
+    Invalidate();
+}
+
+bool SwAnnotationWin::IsResolved() const
+{
+    return static_cast<SwPostItField*>(mpFormatField->GetField())->GetResolved();
+}
+
 
 void SwAnnotationWin::UpdateData()
 {
