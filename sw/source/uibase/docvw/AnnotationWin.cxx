@@ -448,6 +448,12 @@ OUString SwAnnotationWin::GetAuthor()
     return mpField->GetPar1();
 }
 
+bool SwAnnotationWin::GetResolved()
+{
+    return mpField->GetResolved();
+}
+
+
 Date SwAnnotationWin::GetDate()
 {
     return mpField->GetDate();

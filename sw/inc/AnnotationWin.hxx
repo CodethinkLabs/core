@@ -75,6 +75,7 @@ class SwAnnotationWin : public vcl::Window
 
         OUString GetAuthor();
         Date     GetDate();
+        bool     GetResolved();
         tools::Time GetTime();
 
         sal_uInt32 MoveCaret();
