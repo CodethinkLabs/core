@@ -1784,7 +1784,7 @@ bool SwPostItField::GetResolved() const
 std::unique_ptr<SwField> SwPostItField::Copy() const
 {
     std::unique_ptr<SwPostItField> pRet(new SwPostItField( static_cast<SwPostItFieldType*>(GetTyp()), m_sAuthor, m_sText, m_sInitials, m_sName,
-                                             m_aDateTime, m_nPostItId));
+                                                           m_aDateTime, m_bResolved, m_nPostItId));
     if (mpText)
         pRet->SetTextObject( std::make_unique<OutlinerParaObject>(*mpText) );
 
