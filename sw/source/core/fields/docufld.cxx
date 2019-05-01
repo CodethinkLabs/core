@@ -1737,14 +1737,16 @@ SwPostItField::SwPostItField( SwPostItFieldType* pT,
         const OUString& rInitials,
         const OUString& rName,
         const DateTime& rDateTime,
-        const sal_uInt32 nPostItId)
+        const bool bResolved,
+        const sal_uInt32 nPostItId
+)
     : SwField( pT )
     , m_sText( rText )
     , m_sAuthor( rAuthor )
     , m_sInitials( rInitials )
     , m_sName( rName )
     , m_aDateTime( rDateTime )
-    , m_bResolved( false )
+    , m_bResolved( bResolved )
 {
     m_nPostItId = nPostItId == 0 ? m_nLastPostItId++ : nPostItId;
 }
@@ -1850,6 +1852,9 @@ bool SwPostItField::QueryValue( uno::Any& rAny, sal_uInt16 nWhichId ) const
     case FIELD_PROP_PAR4:
         rAny <<= m_sName;
         break;
+    case FIELD_PROP_BOOL1:
+        rAny <<= m_bResolved;
+        break;
     case FIELD_PROP_TEXT:
         {
             if ( !m_xTextObject.is() )
@@ -1887,6 +1892,7 @@ bool SwPostItField::QueryValue( uno::Any& rAny, sal_uInt16 nWhichId ) const
 
 bool SwPostItField::PutValue( const uno::Any& rAny, sal_uInt16 nWhichId )
 {
+    std::cerr << "SwPostItField::PutValue(" << rAny << ")" << std::endl;
     switch( nWhichId )
     {
     case FIELD_PROP_PAR1:
@@ -1902,6 +1908,9 @@ bool SwPostItField::PutValue( const uno::Any& rAny, sal_uInt16 nWhichId )
         break;
     case FIELD_PROP_PAR4:
         rAny >>= m_sName;
+        break;
+    case FIELD_PROP_BOOL1:
+        rAny >>= m_bResolved;
         break;
     case FIELD_PROP_TEXT:
         OSL_FAIL("Not implemented!");

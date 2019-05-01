@@ -100,6 +100,8 @@
 #include <editeng/outlobj.hxx>
 #include <vector>
 
+#include <iostream>
+
 using namespace ::com::sun::star;
 using namespace nsSwDocInfoSubType;
 
@@ -633,7 +635,7 @@ void SAL_CALL SwXFieldMaster::setPropertyValue(
                     "Unknown property: " + rPropertyName,
                     static_cast< cppu::OWeakObject * >( this ) );
             }
-
+            std::cerr << "PutValue("<<rValue<<std::endl;
             pType->PutValue( rValue, nMemberValueId );
             if ( pType->Which() == SwFieldIds::User )
             {
@@ -1351,7 +1353,9 @@ void SAL_CALL SwXTextField::attach(
                     m_pImpl->m_pProps->sPar2, // content
                     m_pImpl->m_pProps->sPar3, // author's initials
                     m_pImpl->m_pProps->sPar4, // name
-                    aDateTime );
+                    aDateTime,
+                    m_pImpl->m_pProps->bBool1 // resolvedflag
+);
                 if ( m_pImpl->m_xTextObject.is() )
                 {
                     pPostItField->SetTextObject( m_pImpl->m_xTextObject->CreateText() );

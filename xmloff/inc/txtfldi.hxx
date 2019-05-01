@@ -1103,6 +1103,7 @@ class XMLAnnotationImportContext : public XMLTextFieldImportContext
     OUString aName;
     OUStringBuffer aTextBuffer;
     OUStringBuffer aDateBuffer;
+    OUStringBuffer aResolvedBuffer;
 
     css::uno::Reference < css::beans::XPropertySet > mxField;
     css::uno::Reference < css::text::XTextCursor >  mxCursor;

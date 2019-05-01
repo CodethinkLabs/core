@@ -459,6 +459,7 @@ public:
                    const OUString& rInitials,
                    const OUString& rName,
                    const DateTime& rDate,
+                   const bool bResolved = false,
                    const sal_uInt32 nPostItId = 0);
 
     SwPostItField(const SwPostItField&) = delete;

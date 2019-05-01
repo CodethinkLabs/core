@@ -34,6 +34,7 @@
 #include <xmloff/xmltoken.hxx>
 #include <xmloff/xmluconv.hxx>
 #include <xmloff/maptype.hxx>
+#include <iostream>
 
 #include "XMLTextCharStyleNamesElementExport.hxx"
 #include <sax/tools/converter.hxx>
@@ -1756,6 +1757,18 @@ void XMLTextFieldExport::ExportFieldHelper(
                                               XML_CREATOR, true,
                                               false );
             GetExport().Characters(aAuthor);
+        }
+
+        // resolved flag
+        {
+            bool b = GetBoolProperty("Resolved", rPropSet);
+            OUString aResolvedText("Resolved");
+            OUString aUnresolvedText("Unresolved");
+
+            SvXMLElementExport aCreatorElem( GetExport(), XML_NAMESPACE_DC,
+                                             XML_RESOLVED, true,
+                                             false );
+            GetExport().Characters(b?aResolvedText:aUnresolvedText);
         }
 
         // date time

@@ -55,6 +55,10 @@ published service Annotation
     /** contains the creation date.
      */
     [optional, property]com::sun::star::util::DateTime DateTimeValue;
+
+    /** Is this issue resolved?
+     */
+    [optional, property]boolean Resolved;
 };
 
 

@@ -3341,6 +3341,7 @@ namespace xmloff { namespace token {
 
         // tdf#115007 spell out numbers, dates, money amounts and cross references
         TOKEN( "transliteration-spellout",         XML_TRANSLITERATION_SPELLOUT ),
+        TOKEN( "resolved",                        XML_RESOLVED ),
 
 #if OSL_DEBUG_LEVEL > 0
         { 0, nullptr, nullptr,                       XML_TOKEN_END }
