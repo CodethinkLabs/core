@@ -160,17 +160,8 @@ void SidebarTextControl::Paint(vcl::RenderContext& rRenderContext, const tools::
     std::cerr << "SidebarTextControl::Paint" << std::endl;
     if (!rRenderContext.GetSettings().GetStyleSettings().GetHighContrastMode())
     {
-        if (mrSidebarWin.IsMouseOverSidebarWin() || HasFocus())
-        {
-            // This is responsible for drawing the gradient.
-            rRenderContext.DrawGradient(tools::Rectangle(Point(10,10), rRenderContext.PixelToLogic(GetSizePixel())),
-                                        Gradient(GradientStyle::Linear, mrSidebarWin.ColorResolved(), mrSidebarWin.ColorDark()));
-        }
-        else
-        {
-            rRenderContext.DrawGradient(tools::Rectangle(Point(10,10), rRenderContext.PixelToLogic(GetSizePixel())),
-                           Gradient(GradientStyle::Linear, mrSidebarWin.ColorLight(), mrSidebarWin.ColorDark()));
-        }
+        rRenderContext.DrawGradient(tools::Rectangle(Point(10,10), rRenderContext.PixelToLogic(GetSizePixel())),
+                                    Gradient(GradientStyle::Linear, mrSidebarWin.ColorResolved(), mrSidebarWin.ColorResolved()));
     }
 
     if (GetTextView())

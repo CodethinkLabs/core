@@ -972,7 +972,7 @@ void SwAnnotationWin::SetColor(Color aColorDark,Color aColorLight, Color aColorA
     mColorDark =  aColorDark;
     mColorLight = aColorLight;
     mColorAnchor = aColorAnchor;
-    mColorResolved =  Color(0x00, 0xFF, 0x00, 0x00);
+    mColorResolved =  Color(0x00, 0x7f, 0x7f, 0x7f);
 
 
     if ( !Application::GetSettings().GetStyleSettings().GetHighContrastMode() )
