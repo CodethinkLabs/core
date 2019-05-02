@@ -275,6 +275,17 @@ void SwView::StateViewOptions(SfxItemSet &rSet)
                     aBool.SetValue( pOpt->IsPostIts());
                 break;
             }
+            case SID_TOGGLE_RESOLVED_NOTES:
+            {
+                if (!GetPostItMgr()->HasNotes())
+                {
+                    rSet.DisableItem(nWhich);
+                    nWhich = 0;
+                }
+                else
+                    aBool.SetValue( pOpt->IsPostIts());
+                break;
+            }
             case FN_VIEW_HIDDEN_PARA:
                 aBool.SetValue( pOpt->IsShowHiddenPara()); break;
             case FN_VIEW_HIDE_WHITESPACE:
