@@ -490,6 +490,7 @@ public:
     const OutlinerParaObject* GetTextObject() const { return mpText.get();}
     void SetTextObject( std::unique_ptr<OutlinerParaObject> pText );
     void SetResolved(bool bNewState);
+    void ToggleResolved();
     bool GetResolved() const;
 
     sal_Int32 GetNumberOfParagraphs() const;

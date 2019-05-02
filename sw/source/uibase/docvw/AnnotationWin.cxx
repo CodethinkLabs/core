@@ -219,6 +219,13 @@ void SwAnnotationWin::MarkResolved()
     Invalidate();
 }
 
+void SwAnnotationWin::ToggleResolved()
+{
+    static_cast<SwPostItField*>(mpFormatField->GetField())->ToggleResolved();
+    Invalidate();
+}
+
+
 bool SwAnnotationWin::IsResolved() const
 {
     return static_cast<SwPostItField*>(mpFormatField->GetField())->GetResolved();

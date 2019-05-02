@@ -1296,10 +1296,11 @@ IMPL_LINK_NOARG(SwAnnotationWin, DeleteHdl, void*, void)
 IMPL_LINK_NOARG(SwAnnotationWin, HideHdl, void*, void)
 {
     std::cerr << "HideHdl[" << this << "]: marking top comment [" << GetTopReplyNote() << " resolved and invalidating" << std::endl;
-    GetTopReplyNote()->MarkResolved();
-    Rescale();
-    Update();
-    Invalidate();
+
+    //GetTopReplyNote()->Hide();
+    GetTopReplyNote()->ToggleResolved();
+    //mrSidebarItem.bShow = false;
+    mrMgr.LayoutPostIts();
 }
 
 

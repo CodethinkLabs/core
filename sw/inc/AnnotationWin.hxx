@@ -191,6 +191,7 @@ class SwAnnotationWin : public vcl::Window
         /// Allows adjusting the point or mark of the selection to a document coordinate.
         void SetCursorLogicPosition(const Point& rPosition, bool bPoint, bool bClearMark);
         void MarkResolved();
+        void ToggleResolved();
         bool IsResolved() const;
     
     private:

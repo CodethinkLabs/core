@@ -1776,6 +1776,11 @@ void SwPostItField::SetResolved(bool bNewState)
     m_bResolved = bNewState;
 }
 
+void SwPostItField::ToggleResolved()
+{
+    m_bResolved = !m_bResolved;
+}
+
 bool SwPostItField::GetResolved() const
 {
     return m_bResolved;
