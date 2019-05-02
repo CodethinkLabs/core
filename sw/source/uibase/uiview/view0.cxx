@@ -437,7 +437,7 @@ void SwView::ExecViewOptions(SfxRequest &rReq)
     case SID_TOGGLE_RESOLVED_NOTES:
         std::cerr << "Clicked on 'show notes' item. current bFlag=" << bFlag << std::endl;
         if ( STATE_TOGGLE == eState )
-            bFlag = !pOpt->IsResolvedPostIts();
+            bFlag = pOpt->IsResolvedPostIts();
 
         if(bFlag) {
             GetPostItMgr()->ShowResolvedNotes();
@@ -446,9 +446,7 @@ void SwView::ExecViewOptions(SfxRequest &rReq)
         }
 
         GetPostItMgr()->SetLayout();
-        pOpt->SetResolvedPostIts( bFlag );
-        if (pOpt->IsPostIts())
-            GetPostItMgr()->CheckMetaText();
+        pOpt->SetResolvedPostIts( !bFlag );
 
         break;
 

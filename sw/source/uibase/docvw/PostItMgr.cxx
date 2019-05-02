@@ -2432,6 +2432,9 @@ void SwPostItMgr::ShowResolvedNotes() {
     }
 }
 
+bool SwPostItMgr::ResolvedPostItsVisible() {
+    return !mpWrtShell->GetViewOptions()->IsResolvedPostIts();
+}
 
 void SwNoteProps::ImplCommit() {}
 void SwNoteProps::Notify( const css::uno::Sequence< OUString >& ) {}

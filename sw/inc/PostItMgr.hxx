@@ -243,6 +243,8 @@ class SwPostItMgr: public SfxListener
         void HideActiveSidebarWin();
         void ToggleInsModeOnActiveSidebarWin();
 
+    bool ResolvedPostItsVisible();
+
         sal_Int32 GetMinimumSizeWithMeta() const;
         sal_Int32 GetSidebarScrollerHeight() const;
 
