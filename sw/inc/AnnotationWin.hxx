@@ -198,6 +198,7 @@ class SwAnnotationWin : public vcl::Window
         void ClearResolved();
         void ToggleResolved();
         bool IsResolved() const;
+        bool IsThreadResolved();
     
     private:
         VclPtr<MenuButton> CreateMenuButton();

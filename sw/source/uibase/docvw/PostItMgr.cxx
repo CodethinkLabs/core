@@ -2405,7 +2405,7 @@ void SwPostItMgr::HideResolvedNotes() {
             {
                 std::cerr << "Checking if note is resolved:" << (*b)->pPostIt->IsResolved() << std::endl;
                 // TODO: Not good enough - either IsResolved needs to check its parent, or we do
-                if ((*b)->pPostIt->IsResolved())
+                if ((*b)->pPostIt->IsThreadResolved())
                     {
                         std::cerr << "This one is, so I'm calling HideNoteSpecial." << std::endl;
                         (*b)->pPostIt->HideNoteSpecial();
@@ -2423,7 +2423,7 @@ void SwPostItMgr::ShowResolvedNotes() {
             {
                 std::cerr << "Checking if note is resolved:" << (*b)->pPostIt->IsResolved() << std::endl;
                 // TODO: Not good enough - either IsResolved needs to check its parent, or we do
-                if ((*b)->pPostIt->IsResolved())
+                if ((*b)->pPostIt->IsThreadResolved())
                     {
                         std::cerr << "This one is, so I'm calling ShowNoteSpecial." << std::endl;
                         (*b)->pPostIt->ShowNoteSpecial();

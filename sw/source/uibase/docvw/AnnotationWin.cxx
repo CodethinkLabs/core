@@ -240,6 +240,12 @@ bool SwAnnotationWin::IsResolved() const
     return static_cast<SwPostItField*>(mpFormatField->GetField())->GetResolved();
 }
 
+// Annoyingly not const becuase GetTopReplyNote isn't; I haven't had time to figure out why
+// not yet
+bool SwAnnotationWin::IsThreadResolved()
+{
+    return GetTopReplyNote()->IsResolved();
+}
 
 void SwAnnotationWin::UpdateData()
 {
