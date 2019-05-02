@@ -219,6 +219,14 @@ void SwAnnotationWin::MarkResolved()
     Invalidate();
 }
 
+void SwAnnotationWin::ClearResolved()
+{
+    // Marks the postit data as resolved
+    static_cast<SwPostItField*>(mpFormatField->GetField())->SetResolved(false);
+    Invalidate();
+}
+
+
 void SwAnnotationWin::ToggleResolved()
 {
     static_cast<SwPostItField*>(mpFormatField->GetField())->ToggleResolved();
@@ -228,6 +236,7 @@ void SwAnnotationWin::ToggleResolved()
 
 bool SwAnnotationWin::IsResolved() const
 {
+    // What's the difference between this and GetResolved? Do we put the check for the parent here?
     return static_cast<SwPostItField*>(mpFormatField->GetField())->GetResolved();
 }
 

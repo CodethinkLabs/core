@@ -278,12 +278,12 @@ void SwView::StateViewOptions(SfxItemSet &rSet)
             case SID_TOGGLE_RESOLVED_NOTES:
             {
                 if (!GetPostItMgr()->HasNotes())
-                {
+                {                    
                     rSet.DisableItem(nWhich);
                     nWhich = 0;
                 }
                 else
-                    aBool.SetValue( pOpt->IsPostIts());
+                    aBool.SetValue( !pOpt->IsResolvedPostIts());
                 break;
             }
             case FN_VIEW_HIDDEN_PARA:
@@ -432,6 +432,24 @@ void SwView::ExecViewOptions(SfxRequest &rReq)
         pOpt->SetPostIts( bFlag );
         if (pOpt->IsPostIts())
             GetPostItMgr()->CheckMetaText();
+        break;
+
+    case SID_TOGGLE_RESOLVED_NOTES:
+        std::cerr << "Clicked on 'show notes' item. current bFlag=" << bFlag << std::endl;
+        if ( STATE_TOGGLE == eState )
+            bFlag = !pOpt->IsResolvedPostIts();
+
+        if(bFlag) {
+            GetPostItMgr()->ShowResolvedNotes();
+        } else {
+            GetPostItMgr()->HideResolvedNotes();
+        }
+
+        GetPostItMgr()->SetLayout();
+        pOpt->SetResolvedPostIts( bFlag );
+        if (pOpt->IsPostIts())
+            GetPostItMgr()->CheckMetaText();
+
         break;
 
     case FN_VIEW_HIDDEN_PARA:

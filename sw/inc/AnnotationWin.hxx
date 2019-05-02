@@ -131,6 +131,10 @@ class SwAnnotationWin : public vcl::Window
         void            ShowAnchorOnly(const Point &aPoint);
         void            ShowNote();
         void            HideNote();
+
+    // Temporary method for hiding/showing resolved notes
+        void            ShowNoteSpecial();
+        void            HideNoteSpecial();
         void            InvalidateControl();
 
         void            ResetAttributes();
@@ -191,6 +195,7 @@ class SwAnnotationWin : public vcl::Window
         /// Allows adjusting the point or mark of the selection to a document coordinate.
         void SetCursorLogicPosition(const Point& rPosition, bool bPoint, bool bClearMark);
         void MarkResolved();
+        void ClearResolved();
         void ToggleResolved();
         bool IsResolved() const;
     

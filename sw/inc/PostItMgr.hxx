@@ -35,6 +35,7 @@
 #include "SidebarWindowsTypes.hxx"
 #include <svl/lstner.hxx>
 #include <vcl/vclptr.hxx>
+#include <iostream>
 
 class OutputDevice;
 class SwWrtShell;
@@ -213,6 +214,9 @@ class SwPostItMgr: public SfxListener
         void Show();
 
         void Rescale();
+
+        void HideResolvedNotes();
+        void ShowResolvedNotes();
 
         tools::Rectangle GetBottomScrollRect(const unsigned long aPage) const;
         tools::Rectangle GetTopScrollRect(const unsigned long aPage) const;

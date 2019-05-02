@@ -2397,7 +2397,44 @@ void SwPostItMgr::GetAllSidebarWinForFrame( const SwFrame& rFrame,
     }
 }
 
+void SwPostItMgr::HideResolvedNotes() {
+    std::cerr << "HideResolvedNotes" << std::endl;
+    for (auto const& pPage : mPages)
+    {
+        for(auto b = pPage->mvSidebarItems.begin(); b!= pPage->mvSidebarItems.end(); ++b)
+            {
+                std::cerr << "Checking if note is resolved:" << (*b)->pPostIt->IsResolved() << std::endl;
+                // TODO: Not good enough - either IsResolved needs to check its parent, or we do
+                if ((*b)->pPostIt->IsResolved())
+                    {
+                        std::cerr << "This one is, so I'm calling HideNoteSpecial." << std::endl;
+                        (*b)->pPostIt->HideNoteSpecial();
+                    }
+            }
+
+    }
+}
+
+void SwPostItMgr::ShowResolvedNotes() {
+    std::cerr << "ShowResolvedNotes" << std::endl;
+    for (auto const& pPage : mPages)
+    {
+        for(auto b = pPage->mvSidebarItems.begin(); b!= pPage->mvSidebarItems.end(); ++b)
+            {
+                std::cerr << "Checking if note is resolved:" << (*b)->pPostIt->IsResolved() << std::endl;
+                // TODO: Not good enough - either IsResolved needs to check its parent, or we do
+                if ((*b)->pPostIt->IsResolved())
+                    {
+                        std::cerr << "This one is, so I'm calling ShowNoteSpecial." << std::endl;
+                        (*b)->pPostIt->ShowNoteSpecial();
+                    }
+            }
+    }
+}
+
+
 void SwNoteProps::ImplCommit() {}
 void SwNoteProps::Notify( const css::uno::Sequence< OUString >& ) {}
+
 
 /* vim:set shiftwidth=4 softtabstop=4 expandtab: */

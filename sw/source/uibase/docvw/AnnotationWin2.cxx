@@ -1073,6 +1073,19 @@ void SwAnnotationWin::ShowNote()
     InvalidateControl();
 }
 
+void SwAnnotationWin::HideNoteSpecial()
+{
+    std::cerr << "Hiding note and redoing layout" << std::endl;
+    mrSidebarItem.bShow = false;
+    mrMgr.LayoutPostIts();
+}
+
+void SwAnnotationWin::ShowNoteSpecial()
+{
+    mrSidebarItem.bShow = true;
+    mrMgr.LayoutPostIts();
+}
+
 void SwAnnotationWin::HideNote()
 {
     if (IsVisible())
