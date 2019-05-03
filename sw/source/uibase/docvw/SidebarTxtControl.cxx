@@ -161,7 +161,7 @@ void SidebarTextControl::Paint(vcl::RenderContext& rRenderContext, const tools::
     if (!rRenderContext.GetSettings().GetStyleSettings().GetHighContrastMode())
     {
         rRenderContext.DrawGradient(tools::Rectangle(Point(10,10), rRenderContext.PixelToLogic(GetSizePixel())),
-                                    Gradient(GradientStyle::Linear, mrSidebarWin.ColorResolved(), mrSidebarWin.ColorResolved()));
+                                    Gradient(GradientStyle::Linear, mrSidebarWin.ColorLight(), mrSidebarWin.ColorLight()));
     }
 
     if (GetTextView())
@@ -169,7 +169,8 @@ void SidebarTextControl::Paint(vcl::RenderContext& rRenderContext, const tools::
         GetTextView()->Paint(rRect, &rRenderContext);
     }
 
-    if (mrSidebarWin.GetLayoutStatus() == SwPostItHelper::DELETED)
+    // What's the point of this? Looks like a red cross through deleted comments?
+    if (mrSidebarWin.GetLayoutStatus() == SwPostItHelper::DELETED || mrSidebarWin.IsThreadResolved())
     {
         rRenderContext.SetLineColor(mrSidebarWin.GetChangeColor());
         rRenderContext.DrawLine(rRenderContext.PixelToLogic(GetPosPixel()),
