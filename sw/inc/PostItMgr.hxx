@@ -217,6 +217,7 @@ class SwPostItMgr: public SfxListener
 
         void HideResolvedNotes();
         void ShowResolvedNotes();
+        void UpdateResolvedStatus(sw::annotation::SwAnnotationWin* topNote);
 
         tools::Rectangle GetBottomScrollRect(const unsigned long aPage) const;
         tools::Rectangle GetTopScrollRect(const unsigned long aPage) const;

@@ -2422,7 +2422,6 @@ void SwPostItMgr::ShowResolvedNotes() {
         for(auto b = pPage->mvSidebarItems.begin(); b!= pPage->mvSidebarItems.end(); ++b)
             {
                 std::cerr << "Checking if note is resolved:" << (*b)->pPostIt->IsResolved() << std::endl;
-                // TODO: Not good enough - either IsResolved needs to check its parent, or we do
                 if ((*b)->pPostIt->IsThreadResolved())
                     {
                         std::cerr << "This one is, so I'm calling ShowNoteSpecial." << std::endl;
@@ -2434,6 +2433,21 @@ void SwPostItMgr::ShowResolvedNotes() {
 
 bool SwPostItMgr::ResolvedPostItsVisible() {
     return !mpWrtShell->GetViewOptions()->IsResolvedPostIts();
+}
+
+void SwPostItMgr::UpdateResolvedStatus(sw::annotation::SwAnnotationWin* topNote) {
+    bool resolved = topNote->IsResolved();
+    std::cerr<< "UpdateResolvedStatus: Updating for top post " << topNote << " which has resolved status "<<resolved << std::endl;
+    for (auto const& pPage : mPages)
+    {
+        for(auto b = pPage->mvSidebarItems.begin(); b!= pPage->mvSidebarItems.end(); ++b)
+            {
+                if((*b)->pPostIt->GetTopReplyNote() == topNote) {
+                    std::cerr<< "  " << (*b)->pPostIt << " is a child and will be set to "<<resolved << std::endl;
+                    (*b)->pPostIt->SetResolved(resolved);
+                }
+            }
+    }
 }
 
 void SwNoteProps::ImplCommit() {}

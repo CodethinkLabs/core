@@ -212,24 +212,19 @@ void SwAnnotationWin::SetPostItText()
     Invalidate();
 }
 
-void SwAnnotationWin::MarkResolved()
+void SwAnnotationWin::SetResolved(bool resolved)
 {
     // Marks the postit data as resolved
-    static_cast<SwPostItField*>(mpFormatField->GetField())->SetResolved(true);
+    static_cast<SwPostItField*>(mpFormatField->GetField())->SetResolved(resolved);
+    mrSidebarItem.bShow = !resolved || mrMgr.ResolvedPostItsVisible();
+    std::cerr << this << " bShow set to " << mrSidebarItem.bShow << std::endl;
     Invalidate();
 }
-
-void SwAnnotationWin::ClearResolved()
-{
-    // Marks the postit data as resolved
-    static_cast<SwPostItField*>(mpFormatField->GetField())->SetResolved(false);
-    Invalidate();
-}
-
 
 void SwAnnotationWin::ToggleResolved()
 {
     static_cast<SwPostItField*>(mpFormatField->GetField())->ToggleResolved();
+    mrSidebarItem.bShow = !IsResolved() || mrMgr.ResolvedPostItsVisible();
     Invalidate();
 }
 
@@ -240,7 +235,7 @@ bool SwAnnotationWin::IsResolved() const
     return static_cast<SwPostItField*>(mpFormatField->GetField())->GetResolved();
 }
 
-// Annoyingly not const becuase GetTopReplyNote isn't; I haven't had time to figure out why
+// Annoyingly not const because GetTopReplyNote isn't; I haven't had time to figure out why
 // not yet
 bool SwAnnotationWin::IsThreadResolved()
 {
@@ -330,6 +325,7 @@ sal_uInt32 SwAnnotationWin::CalcParent()
         const SwPostItField* pPostItField = static_cast<const SwPostItField*>(pField);
         nParentId = pPostItField->GetPostItId();
     }
+    std::cerr << "Calculating parent for post ["<<this<<"]: pField="<<pField<<" nParentId="<<nParentId<< " starting at "<<aPosition.nContent << std::endl;
     return nParentId;
 }
 

@@ -1310,15 +1310,9 @@ IMPL_LINK_NOARG(SwAnnotationWin, HideHdl, void*, void)
 {
     std::cerr << "HideHdl[" << this << "]: toggling resovled status of top comment [" << GetTopReplyNote() << "]" << std::endl;
 
-    //GetTopReplyNote()->Hide();
     GetTopReplyNote()->ToggleResolved();
-
-    // If we can't see resolved post-its, hide this now
-    if(IsResolved() && !mrMgr.ResolvedPostItsVisible()) {
-        std::cerr << "Resolved comments are invisible, so hiding this straight away" << std::endl;
-        mrSidebarItem.bShow = false;
-        mrMgr.LayoutPostIts();
-    }
+    mrMgr.UpdateResolvedStatus(GetTopReplyNote());
+    mrMgr.LayoutPostIts();
 }
 
 
