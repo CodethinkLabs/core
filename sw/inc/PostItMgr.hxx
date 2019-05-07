@@ -211,6 +211,7 @@ class SwPostItMgr: public SfxListener
         void Hide( const OUString& rAuthor );
         void Hide();
         void Show();
+        void ShowHideResolvedNotes(bool visible);
         void UpdateResolvedStatus(sw::annotation::SwAnnotationWin* topNote);
 
         void Rescale();
@@ -239,6 +240,8 @@ class SwPostItMgr: public SfxListener
         void DeleteActiveSidebarWin();
         void HideActiveSidebarWin();
         void ToggleInsModeOnActiveSidebarWin();
+
+        bool ResolvedPostItsVisible();
 
         sal_Int32 GetMinimumSizeWithMeta() const;
         sal_Int32 GetSidebarScrollerHeight() const;
