@@ -1113,7 +1113,10 @@ void SwAnnotationShell::NoteExec(SfxRequest const &rReq)
             if ( pPostItMgr->HasActiveSidebarWin() )
                 pPostItMgr->GetActiveSidebarWin()->ExecuteCommand(nSlot);
             break;
-
+        case FN_RESOLVE_NOTE:
+            if ( pPostItMgr->HasActiveSidebarWin() )
+                pPostItMgr->GetActiveSidebarWin()->ExecuteCommand(nSlot);
+            break;
         case FN_DELETE_ALL_NOTES:
             pPostItMgr->Delete();
             break;

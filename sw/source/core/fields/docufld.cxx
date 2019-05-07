@@ -1771,6 +1771,21 @@ OUString SwPostItField::GetDescription() const
     return SwResId(STR_NOTE);
 }
 
+void SwPostItField::SetResolved(bool bNewState)
+{
+    m_bResolved = bNewState;
+}
+
+void SwPostItField::ToggleResolved()
+{
+    m_bResolved = !m_bResolved;
+}
+
+bool SwPostItField::GetResolved() const
+{
+    return m_bResolved;
+}
+
 std::unique_ptr<SwField> SwPostItField::Copy() const
 {
     std::unique_ptr<SwPostItField> pRet(new SwPostItField( static_cast<SwPostItFieldType*>(GetTyp()), m_sAuthor, m_sText, m_sInitials, m_sName,
