@@ -98,6 +98,7 @@ SwAnnotationWin::SwAnnotationWin( SwEditWin& rEditWin,
     , mpFormatField(aField)
     , mpField( static_cast<SwPostItField*>(aField->GetField()))
     , mpButtonPopup(nullptr)
+    , mbResolvedStateUpdated(false)
 {
     mpShadow = sidebarwindows::ShadowOverlayObject::CreateShadowOverlayObject( mrView );
     if ( mpShadow )
@@ -239,6 +240,9 @@ void SwAnnotationWin::ToggleResolved()
 {
     static_cast<SwPostItField*>(mpFormatField->GetField())->ToggleResolved();
     mrSidebarItem.bShow = !IsResolved() || mrMgr.ResolvedPostItsVisible();
+    std::cerr << "ToggledResolved on " << this << ": bShow is now " << mrSidebarItem.bShow <<std::endl;
+    mbResolvedStateUpdated = true;
+    UpdateData();
     Invalidate();
 }
 
@@ -256,7 +260,7 @@ bool SwAnnotationWin::IsThreadResolved()
 
 void SwAnnotationWin::UpdateData()
 {
-    if ( mpOutliner->IsModified() )
+    if ( mpOutliner->IsModified() || mbResolvedStateUpdated)
     {
         IDocumentUndoRedo & rUndoRedo(
             mrView.GetDocShell()->GetDoc()->GetIDocumentUndoRedo());

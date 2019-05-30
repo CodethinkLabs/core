@@ -171,6 +171,13 @@ static void lcl_SetViewMetaChars( SwViewOption& rVOpt, bool bOn)
     }
 }
 
+static void lcl_SetViewResolvedComments( SwViewOption& rVOpt, bool bOn)
+{
+    std::cerr << "lcl_SetViewResolvedComments: Unimplemented" << std::endl;
+    rVOpt.SetResolvedPostIts( bOn );
+}
+
+
 void SwView::RecheckBrowseMode()
 {
     // OS: pay attention to numerical order!
@@ -181,9 +188,10 @@ void SwView::RecheckBrowseMode()
             SID_RULER_BORDERS, SID_RULER_PAGE_POS,
             //SID_ATTR_LONG_LRSPACE,
             SID_HTML_MODE,
-            SID_RULER_PROTECT,
+            SID_RULER_PROTECT, /* 10915 */
             //SID_AUTOSPELL_CHECK,
             //SID_AUTOSPELL_MARKOFF,
+            SID_TOGGLE_RESOLVED_NOTES, /* 11672*/
             FN_RULER,       /*20211*/
             FN_VIEW_GRAPHIC,    /*20213*/
             FN_VIEW_BOUNDS,     /**/
@@ -262,6 +270,9 @@ void SwView::StateViewOptions(SfxItemSet &rSet)
                 aBool.SetValue( lcl_IsViewMarks(*pOpt) ); break;
             case FN_VIEW_META_CHARS:
                 aBool.SetValue( pOpt->IsViewMetaChars() ); break;
+            case SID_TOGGLE_RESOLVED_NOTES:
+                std::cerr << "view0.cxx: Retrieving value of resolved comments, which is " << pOpt->IsResolvedPostIts() << std::endl;
+                aBool.SetValue( pOpt->IsResolvedPostIts() ); break;
             case FN_VIEW_TABLEGRID:
                 aBool.SetValue( SwViewOption::IsTableBoundaries() ); break;
             case SID_TOGGLE_NOTES:
@@ -273,17 +284,6 @@ void SwView::StateViewOptions(SfxItemSet &rSet)
                 }
                 else
                     aBool.SetValue( pOpt->IsPostIts());
-                break;
-            }
-            case SID_TOGGLE_RESOLVED_NOTES:
-            {
-                if (!GetPostItMgr()->HasNotes())
-                {
-                    rSet.DisableItem(nWhich);
-                    nWhich = 0;
-                }
-                else
-                    aBool.SetValue( !pOpt->IsResolvedPostIts());
                 break;
             }
             case FN_VIEW_HIDDEN_PARA:
@@ -429,17 +429,6 @@ void SwView::ExecViewOptions(SfxRequest &rReq)
             GetPostItMgr()->CheckMetaText();
         break;
 
-    case SID_TOGGLE_RESOLVED_NOTES:
-        if ( STATE_TOGGLE == eState )
-            bFlag = pOpt->IsResolvedPostIts();
-
-        GetPostItMgr()->ShowHideResolvedNotes(bFlag);
-
-        GetPostItMgr()->SetLayout();
-        pOpt->SetResolvedPostIts( !bFlag );
-
-        break;
-
     case FN_VIEW_HIDDEN_PARA:
         if ( STATE_TOGGLE == eState )
             bFlag = !pOpt->IsShowHiddenPara();
@@ -515,6 +504,24 @@ void SwView::ExecViewOptions(SfxRequest &rReq)
             bFlag = !pOpt->IsViewMetaChars();
 
         lcl_SetViewMetaChars( *pOpt, bFlag );
+        break;
+
+    case SID_TOGGLE_RESOLVED_NOTES:
+        if( STATE_TOGGLE == eState )
+            bFlag = !pOpt->IsResolvedPostIts();
+
+        std::cerr << "view0.cxx: Toggling resolved comments (in ExecViewOptions); now " << bFlag << std::endl;
+
+        lcl_SetViewResolvedComments( *pOpt, bFlag );
+
+        {// Need a view shell to send an update message to
+            const SfxViewShell* pViewShell = GetViewShell();
+            char command_buf[256];
+            snprintf(command_buf, 256, ".uno:ShowResolvedAnnotations=%s", bFlag? "true":"false");
+            pViewShell->libreOfficeKitViewCallback(LOK_CALLBACK_STATE_CHANGED,
+                                               command_buf);
+        }
+
         break;
 
     case SID_AUTOSPELL_CHECK:

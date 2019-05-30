@@ -245,6 +245,8 @@ class SwAnnotationWin : public vcl::Window
         long            mPageBorder;
         bool            mbAnchorRectChanged;
 
+        bool            mbResolvedStateUpdated;
+
         std::vector<basegfx::B2DRange> maAnnotationTextRanges;
 
         bool            mbMouseOver;
