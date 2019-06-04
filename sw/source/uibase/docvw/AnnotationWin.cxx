@@ -231,8 +231,11 @@ void SwAnnotationWin::SetPostItText()
 
 void SwAnnotationWin::SetResolved(bool resolved)
 {
+    std::cerr << "SetResolved "<<resolved << std::endl;
     static_cast<SwPostItField*>(mpFormatField->GetField())->SetResolved(resolved);
     mrSidebarItem.bShow = !resolved || mrMgr.ResolvedPostItsVisible();
+    mbResolvedStateUpdated = true;
+    UpdateData();
     Invalidate();
 }
 
