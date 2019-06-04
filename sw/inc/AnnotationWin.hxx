@@ -193,6 +193,7 @@ class SwAnnotationWin : public vcl::Window
         void SetCursorLogicPosition(const Point& rPosition, bool bPoint, bool bClearMark);
         void SetResolved(bool resolved);
         void ToggleResolved();
+    void ToggleResolvedForThread();
         bool IsResolved() const;
         bool IsThreadResolved();
         SwAnnotationWin*   GetTopReplyNote();

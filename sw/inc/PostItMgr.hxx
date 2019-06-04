@@ -223,6 +223,7 @@ class SwPostItMgr: public SfxListener
         void Delete(sal_uInt32 nPostItId);
         void Delete();
         void ToggleResolved(sal_uInt32 nPostItId);
+        void ToggleResolvedForThread(sal_uInt32 nPostItId);
 
         void ExecuteFormatAllDialog(SwView& rView);
         void FormatAll(const SfxItemSet &rNewAttr);

@@ -246,6 +246,12 @@ void SwAnnotationWin::ToggleResolved()
     Invalidate();
 }
 
+void SwAnnotationWin::ToggleResolvedForThread()
+{
+    GetTopReplyNote()->ToggleResolved();
+    mrMgr.UpdateResolvedStatus(GetTopReplyNote());
+    mrMgr.LayoutPostIts();
+}
 
 bool SwAnnotationWin::IsResolved() const
 {

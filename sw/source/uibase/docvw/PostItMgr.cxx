@@ -1525,7 +1525,7 @@ void SwPostItMgr::Delete(sal_uInt32 nPostItId)
     LayoutPostIts();
 }
 
-void SwPostItMgr::ToggleResolved(sal_uInt32 nPostItId)
+void SwPostItMgr::ToggleResolvedForThread(sal_uInt32 nPostItId)
 {
     mpWrtShell->StartAllAction();
 
@@ -1540,7 +1540,7 @@ void SwPostItMgr::ToggleResolved(sal_uInt32 nPostItId)
     // pField now contains our AnnotationWin object
     if (pField) {
         SwAnnotationWin* pWin = GetSidebarWin(pField);
-        pWin->ToggleResolved();
+        pWin->ToggleResolvedForThread();
     }
 
     PrepareView();
