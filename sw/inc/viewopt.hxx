@@ -264,7 +264,7 @@ public:
     bool IsResolvedPostIts() const
         { return bool(m_nUIOptions & ViewOptFlags2::ResolvedPostits); }
     void SetResolvedPostIts( bool b )
-        { SetUIOption(b, ViewOptFlags2::ResolvedPostits); }
+        { b ? (m_nUIOptions |= ViewOptFlags2::ResolvedPostits) : ( m_nUIOptions &= ~ViewOptFlags2::ResolvedPostits ); }
 
     static void PaintPostIts( OutputDevice *pOut, const SwRect &rRect,
                               bool bIsScript );
