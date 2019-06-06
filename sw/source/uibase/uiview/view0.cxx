@@ -65,6 +65,8 @@
 #include <swslots.hxx>
 #include <PostItMgr.hxx>
 
+#include <LibreOfficeKit/LibreOfficeKitEnums.h>
+
 using namespace ::com::sun::star;
 
 #include <unotools/moduleoptions.hxx>

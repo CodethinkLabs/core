@@ -296,6 +296,7 @@ void SwAnnotationWin::UpdateData()
     }
     mpOutliner->ClearModifyFlag();
     mpOutliner->GetUndoManager().Clear();
+    mbResolvedStateUpdated = false;
 }
 
 void SwAnnotationWin::Delete()
