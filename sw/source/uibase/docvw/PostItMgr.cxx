@@ -2369,7 +2369,7 @@ void SwPostItMgr::GetAllSidebarWinForFrame( const SwFrame& rFrame,
 void SwPostItMgr::ShowHideResolvedNotes(bool visible) {
     for (auto const& pPage : mPages)
     {
-        for(auto b = pPage->mvSidebarItems.begin(); b!= pPage->mvSidebarItems.end(); ++b)
+        for(auto b = pPage->mList->begin(); b!= pPage->mList->end(); ++b)
             {
                 if ((*b)->pPostIt->IsThreadResolved())
                     {
@@ -2392,7 +2392,7 @@ void SwPostItMgr::UpdateResolvedStatus(sw::annotation::SwAnnotationWin* topNote)
     bool resolved = topNote->IsResolved();
     for (auto const& pPage : mPages)
     {
-        for(auto b = pPage->mvSidebarItems.begin(); b!= pPage->mvSidebarItems.end(); ++b)
+        for(auto b = pPage->mList->begin(); b!= pPage->mList->end(); ++b)
         {
             if((*b)->pPostIt->GetTopReplyNote() == topNote) {
                (*b)->pPostIt->SetResolved(resolved);
