@@ -482,6 +482,7 @@ public:
     const OUString&         GetName() const { return sName;}
 
     const OutlinerParaObject* GetTextObject() const { return mpText;}
+    void SetTextObject( OutlinerParaObject* pText );
 
     void SetResolved(bool bNewState);
     void ToggleResolved();
