@@ -342,6 +342,16 @@ void SwTextShell::ExecField(SfxRequest &rReq)
                 }
             }
             break;
+            case FN_RESOLVE_NOTE:
+            {
+                std::cerr << "FN_RESOLVE_NOTE hit in textfld.cxx" << std::endl;;
+                const SvxPostItIdItem* pIdItem = rReq.GetArg<SvxPostItIdItem>(SID_ATTR_POSTIT_ID);
+                if (pIdItem && !pIdItem->GetValue().isEmpty() && GetView().GetPostItMgr())
+                {
+                    GetView().GetPostItMgr()->ToggleResolved(pIdItem->GetValue().toUInt32());
+                }
+            }
+            break;
             case FN_DELETE_ALL_NOTES:
                 if ( GetView().GetPostItMgr() )
                     GetView().GetPostItMgr()->Delete();
