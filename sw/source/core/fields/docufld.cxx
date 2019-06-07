@@ -1642,13 +1642,16 @@ SwPostItField::SwPostItField( SwPostItFieldType* pT,
         const OUString& rInitials,
         const OUString& rName,
         const DateTime& rDateTime,
-        const sal_uInt32 nPostItId)
+        const bool bResolved,
+        const sal_uInt32 nPostItId
+)
     : SwField( pT )
     , sText( rText )
     , sAuthor( rAuthor )
     , sInitials( rInitials )
     , sName( rName )
     , aDateTime( rDateTime )
+    , m_bResolved( bResolved )
     , mpText( nullptr )
 {
     m_nPostItId = nPostItId == 0 ? m_nLastPostItId++ : nPostItId;
@@ -1674,10 +1677,25 @@ OUString SwPostItField::GetDescription() const
     return SwResId(STR_NOTE);
 }
 
+void SwPostItField::SetResolved(bool bNewState)
+{
+    m_bResolved = bNewState;
+}
+
+void SwPostItField::ToggleResolved()
+{
+    m_bResolved = !m_bResolved;
+}
+
+bool SwPostItField::GetResolved() const
+{
+    return m_bResolved;
+}
+
 SwField* SwPostItField::Copy() const
 {
     SwPostItField* pRet = new SwPostItField( static_cast<SwPostItFieldType*>(GetTyp()), sAuthor, sText, sInitials, sName,
-                                             aDateTime, m_nPostItId);
+                                             aDateTime, m_bResolved, m_nPostItId);
     if (mpText)
         pRet->SetTextObject( new OutlinerParaObject(*mpText) );
 
@@ -1746,6 +1764,9 @@ bool SwPostItField::QueryValue( uno::Any& rAny, sal_uInt16 nWhichId ) const
     case FIELD_PROP_PAR4:
         rAny <<= sName;
         break;
+    case FIELD_PROP_BOOL1:
+        rAny <<= m_bResolved;
+        break;
     case FIELD_PROP_TEXT:
         {
             if ( !m_xTextObject.is() )
@@ -1802,6 +1823,9 @@ bool SwPostItField::PutValue( const uno::Any& rAny, sal_uInt16 nWhichId )
         break;
     case FIELD_PROP_PAR4:
         rAny >>= sName;
+        break;
+    case FIELD_PROP_BOOL1:
+        rAny >>= m_bResolved;
         break;
     case FIELD_PROP_TEXT:
         OSL_FAIL("Not implemented!");
