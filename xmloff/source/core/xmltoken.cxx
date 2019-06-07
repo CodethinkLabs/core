@@ -3297,6 +3297,9 @@ namespace xmloff { namespace token {
 
         TOKEN( "creator-initials",                XML_CREATOR_INITIALS ),
 
+        // For recording whether comments/annotations are resolved
+        TOKEN( "resolved",                        XML_RESOLVED ),
+
 #if OSL_DEBUG_LEVEL > 0
         { 0, nullptr, nullptr,                       XML_TOKEN_END }
 #else

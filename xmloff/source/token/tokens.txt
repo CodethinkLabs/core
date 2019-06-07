@@ -3069,4 +3069,5 @@ max-numerator-digits
 zeros-numerator-digits
 zeros-denominator-digits
 integer-fraction-delimiter
+resolved
 TOKEN_END_DUMMY
