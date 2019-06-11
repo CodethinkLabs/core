@@ -232,6 +232,7 @@ class SwPostItMgr: public SfxListener
         void Hide();
         void Show();
         void UpdateResolvedStatus(sw::annotation::SwAnnotationWin* topNote);
+        void ShowHideResolvedNotes(bool visible);
 
         void Rescale();
 
