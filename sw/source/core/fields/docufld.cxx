@@ -1679,17 +1679,17 @@ OUString SwPostItField::GetDescription() const
 
 void SwPostItField::SetResolved(bool bNewState)
 {
-    m_bResolved = bNewState;
+    bResolved = bNewState;
 }
 
 void SwPostItField::ToggleResolved()
 {
-    m_bResolved = !m_bResolved;
+    bResolved = !bResolved;
 }
 
 bool SwPostItField::GetResolved() const
 {
-    return m_bResolved;
+    return bResolved;
 }
 
 SwField* SwPostItField::Copy() const
