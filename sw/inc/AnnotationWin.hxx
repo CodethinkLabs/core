@@ -231,6 +231,7 @@ class SwAnnotationWin : public vcl::Window
         VclPtr<ScrollBar>      mpVScrollbar;
         VclPtr<Edit>           mpMetadataAuthor;
         VclPtr<Edit>           mpMetadataDate;
+        VclPtr<Edit>           mpMetadataResolved;
         VclPtr<MenuButton>     mpMenuButton;
 
         sw::sidebarwindows::AnchorOverlayObject* mpAnchor;
